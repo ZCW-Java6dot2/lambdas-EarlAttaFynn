@@ -5,22 +5,22 @@ import java.util.Random;
 public class Person {
 
 
-    public enum Sex {
-        MALE, FEMALE
-    }
-
     String name;
     Integer age;
     LocalDate birthday;
     Sex gender;
     String emailAddress;
+    public enum Sex {
+        MALE, FEMALE
+    }
 
-    public Person(String name, String emailAddress) {
+    public Person(String name) {
         this.name = name;
         this.age = generateAge();
         this.birthday = generateBirthDay();
         this.gender = getGender();
-        this.emailAddress = emailAddress;
+        this.emailAddress = name + "@hotmail.com";
+        Roster.getInstance().getRoster(this);
     }
 
     public int generateAge() {
@@ -82,7 +82,7 @@ public class Person {
     }
 
     public static void main(String[] args) {
-        Person person = new Person("Celine", "celine@gmail.com");
-        person.printPerson();
+//        Person person = new Person("Celine", "celine@gmail.com");
+//        person.printPerson();
     }
 }
