@@ -4,12 +4,13 @@ import java.util.Random;
 
 public class Person {
 
-
     String name;
     Integer age;
     LocalDate birthday;
     Sex gender;
     String emailAddress;
+
+
     public enum Sex {
         MALE, FEMALE
     }
@@ -20,7 +21,8 @@ public class Person {
         this.birthday = generateBirthDay();
         this.gender = getGender();
         this.emailAddress = name + "@hotmail.com";
-        Roster.getInstance().getRoster(this);
+        Roster.getInstance().getRoster().add(this);
+        Roster.getInstance2().getRoster().add(this);
     }
 
     public int generateAge() {
@@ -28,9 +30,9 @@ public class Person {
         int generated;
         Random random = new Random();
 
-        generated = random.nextInt(65);
-        while (generated < 21) {
-            generated = random.nextInt(65);
+        generated = random.nextInt(75);
+        while (generated < 16) {
+            generated = random.nextInt(75);
         }
         age = generated;
         return age;
@@ -70,19 +72,14 @@ public class Person {
         }
     }
 
-
-    public String printPerson() {
+    @Override
+    public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
         String print =
-                String.format("%s\n%s\n%d\n%s\n%s",
-                this.name,this.gender.name(), this.age, this.birthday.format(formatter),
-                 this.emailAddress);
+                String.format("%s\n%s\n%d\n%s\n%s\n",
+                        this.name, this.gender.name(), this.age, this.birthday.format(formatter),
+                        this.emailAddress);
         System.out.println(print);
         return print;
-    }
-
-    public static void main(String[] args) {
-//        Person person = new Person("Celine", "celine@gmail.com");
-//        person.printPerson();
     }
 }
